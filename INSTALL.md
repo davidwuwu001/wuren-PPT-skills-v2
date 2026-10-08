@@ -90,8 +90,9 @@ Windows 把上面命令换成 `install.ps1` 的那条。
 
 | 现象 | 原因与处理 |
 |---|---|
-| 助手里看不到这个 skill | 助手只在启动时扫描，重启它 |
-| 按目录名提示找不到 skill | 已修复：SKILL.md 里的 `name` 已与目录名统一为 `wuren-PPT-skills-v2` |
+| 助手里看不到这个 skill | 助手只在启动时扫描 skills 目录，**装完必须重启助手** |
+| 重启后仍提示找不到 | 极少数助手按 frontmatter 里的 `name` 查找。该字段已与目录名统一为 `wuren-PPT-skills-v2`，若仍失败请贴报错原文 |
+| 装完说「找不到 wuren-PPT-skills-v2」但目录确实存在 | 助手缓存了旧的 skill 名册（改名前叫 `wuren-ppt-v2`），彻底退出重开助手进程 |
 | `npm: command not found` | 没装 Node.js。生成 PPTX 需要 PptxGenJS |
 | `ModuleNotFoundError: pptx` | 跑 `pip3 install python-pptx`，或 `bash install.sh` 会提示 |
 | Windows 链接失败 | 开开发者模式，或用管理员身份运行 PowerShell |
