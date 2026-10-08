@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Node 依赖（PptxGenJS 用 npm install 装，不入库）
+node_modules/
+package-lock.json
+
+# 生成产物
+*.pptx
+*.pdf
+preview/
+output/
+
+# 系统
+.DS_Store
+Thumbs.db
+
+# 私密配置兜底
+.env
+.env.*

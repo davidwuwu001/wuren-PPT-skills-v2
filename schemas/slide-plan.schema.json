@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Wuren PPT V2 Slide Plan",
+  "type": "object",
+  "required": ["deckBrief", "slides", "qualityBar"],
+  "additionalProperties": false,
+  "properties": {
+    "deckBrief": {
+      "type": "object",
+      "required": ["purpose", "scenario", "audience", "tone", "styleProfile", "assumptions"],
+      "additionalProperties": false,
+      "properties": {
+        "purpose": { "type": "string" },
+        "scenario": {
+          "type": "string",
+          "enum": [
+            "internal_training",
+            "student_lesson",
+            "parent_talk",
+            "camp_closing",
+            "leadership_report",
+            "annual_summary",
+            "proposal_sales",
+            "enrollment_recruitment",
+            "public_keynote",
+            "knowledge_share"
+          ]
+        },
+        "secondaryScenario": {
+          "type": "string",
+          "enum": [
+            "internal_training",
+            "student_lesson",
+            "parent_talk",
+            "camp_closing",
+            "leadership_report",
+            "annual_summary",
+            "proposal_sales",
+            "enrollment_recruitment",
+            "public_keynote",
+            "knowledge_share"
+          ]
+        },
+        "audience": { "type": "string" },
+        "tone": {
+          "type": "string",
+          "enum": ["warm", "practical", "executive", "persuasive", "keynote"]
+        },
+        "styleProfile": {
+          "type": "object",
+          "required": ["fontStrategy", "colorStrategy", "layoutDensity"],
+          "additionalProperties": false,
+          "properties": {
+            "fontStrategy": {
+              "type": "string",
+              "enum": ["warm", "professional", "hybrid"]
+            },
+            "colorStrategy": { "type": "string" },
+            "layoutDensity": {
+              "type": "string",
+              "enum": ["low", "medium", "high"]
+            }
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "slides": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "intent", "contentDensity", "colorRole", "fontRole", "title", "payload"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "cover",
+              "agenda",
+              "sectionDivider",
+              "quote",
+              "bigNumber",
+              "cards",
+              "compare",
+              "timeline",
+              "chart",
+              "testimonial",
+              "caseStory",
+              "activity",
+              "summaryAction",
+              "closing"
+            ]
+          },
+          "intent": { "type": "string" },
+          "contentDensity": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          },
+          "colorRole": {
+            "type": "string",
+            "enum": [
+              "brand",
+              "learning",
+              "insight",
+              "action",
+              "risk",
+              "emotion",
+              "proof",
+              "neutral"
+            ]
+          },
+          "fontRole": {
+            "type": "string",
+            "enum": ["warm", "professional", "hybrid"]
+          },
+          "title": { "type": "string" },
+          "payload": {
+            "type": "object"
+          },
+          "assetHint": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "useTangzai": { "type": "boolean" },
+              "tangzaiKey": {
+                "type": "string",
+                "enum": ["cheer", "think", "study", "hello", "explore", "superhero", "coding", "time", "leisure3d"]
+              },
+              "imageNeed": { "type": "string" }
+            }
+          },
+          "requiredAssets": {
+            "type": "object",
+            "description": "Declare what visual assets this slide must include, so the script generator can plan layout and pull from the correct pool.",
+            "additionalProperties": false,
+            "properties": {
+              "teacherPhotoCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 12,
+                "description": "Number of teacher portrait photos (3744x5616, ratio 0.667) to include. Generator should pick from /老师照片/."
+              },
+              "trainingSceneCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 6,
+                "description": "Number of training/scene photos to include."
+              },
+              "reviewScreenshotCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 6,
+                "description": "Number of parent review / chat screenshots to include. Aspect ratio is tall (~0.45-0.55), so card must be tall + narrow."
+              },
+              "needsQRCode": {
+                "type": "boolean",
+                "description": "Set true if this slide should display a contact QR code (recruitment/CTA slides)."
+              },
+              "needsDataChart": {
+                "type": "boolean",
+                "description": "Set true if this slide needs a chart (chart / bigNumber)."
+              },
+              "needsBackgroundImage": {
+                "type": "boolean",
+                "description": "Set true if this slide needs a full or partial background image (cover / divider)."
+              },
+              "notes": {
+                "type": "string",
+                "description": "Free-form note for the script generator about asset intent, e.g. '4张团队感老师照,2行2列'."
+              }
+            }
+          }
+        }
+      }
+    },
+    "qualityBar": {
+      "type": "object",
+      "required": ["maxBodyCharsLowDensity", "minMarginInches", "logoRequired", "renderRequired", "minTangzaiSlides"],
+      "additionalProperties": false,
+      "properties": {
+        "maxBodyCharsLowDensity": { "type": "integer", "minimum": 20, "maximum": 100 },
+        "minMarginInches": { "type": "number", "minimum": 0.4 },
+        "logoRequired": { "type": "boolean" },
+        "renderRequired": { "type": "boolean" },
+        "minTangzaiSlides": { "type": "integer", "minimum": 0, "maximum": 7 }
+      }
+    }
+  }
+}

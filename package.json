@@ -1,0 +1,9 @@
+{
+  "name": "wuren-ppt-skills-v2-runtime",
+  "version": "1.0.0",
+  "private": true,
+  "description": "生成 PPTX 用到的运行时依赖，随 skill 一起安装。依赖本体不提交到仓库。",
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}
