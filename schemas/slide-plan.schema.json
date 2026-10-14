@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Wuren PPT V2 Slide Plan",
   "type": "object",
-  "required": ["deckBrief", "slides", "qualityBar"],
+  "required": ["deckBrief", "slides", "designConstraints"],
   "additionalProperties": false,
   "properties": {
     "deckBrief": {
@@ -56,6 +56,10 @@
               "enum": ["warm", "professional", "hybrid"]
             },
             "colorStrategy": { "type": "string" },
+            "designDirection": { "type": "string", "minLength": 1 },
+            "designRationale": { "type": "string", "minLength": 1 },
+            "motif": { "type": "string", "minLength": 1 },
+            "rhythm": { "type": "string", "minLength": 1 },
             "layoutDensity": {
               "type": "string",
               "enum": ["low", "medium", "high"]
@@ -95,7 +99,14 @@
               "closing"
             ]
           },
+          "layoutVariant": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Content-driven composition; required for new plans, optional for older plans."
+          },
           "intent": { "type": "string" },
+          "narrativeRole": { "type": "string", "minLength": 1 },
+          "visualFocus": { "type": "string", "minLength": 1 },
           "contentDensity": {
             "type": "string",
             "enum": ["low", "medium", "high"]
@@ -125,10 +136,26 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "useTangzai": { "type": "boolean" },
+              "useTangzai": { "type": "boolean", "description": "Per-slide scene and composition decision; false is valid, with no deck-wide quota." },
               "tangzaiKey": {
                 "type": "string",
-                "enum": ["cheer", "think", "study", "hello", "explore", "superhero", "coding", "time", "leisure3d"]
+                "enum": ["cheer", "think", "study", "hello", "explore", "superhero", "coding", "time", "leisure3d", "office", "climb", "time3d"]
+              },
+              "selectionReason": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Why IP supports this slide, or why the scene/composition is better without it."
+              },
+              "placement": {
+                "type": "object",
+                "required": ["x", "y", "w", "h"],
+                "additionalProperties": false,
+                "properties": {
+                  "x": { "type": "number", "minimum": 0 },
+                  "y": { "type": "number", "minimum": 0 },
+                  "w": { "type": "number", "exclusiveMinimum": 0 },
+                  "h": { "type": "number", "exclusiveMinimum": 0 }
+                }
               },
               "imageNeed": { "type": "string" }
             }
@@ -177,16 +204,15 @@
         }
       }
     },
-    "qualityBar": {
+    "designConstraints": {
       "type": "object",
-      "required": ["maxBodyCharsLowDensity", "minMarginInches", "logoRequired", "renderRequired", "minTangzaiSlides"],
+      "required": ["maxBodyCharsLowDensity", "minMarginInches", "logoRequired"],
       "additionalProperties": false,
       "properties": {
         "maxBodyCharsLowDensity": { "type": "integer", "minimum": 20, "maximum": 100 },
         "minMarginInches": { "type": "number", "minimum": 0.4 },
         "logoRequired": { "type": "boolean" },
-        "renderRequired": { "type": "boolean" },
-        "minTangzaiSlides": { "type": "integer", "minimum": 0, "maximum": 7 }
+        "minTangzaiSlides": { "type": "integer", "minimum": 0, "default": 0, "deprecated": true, "description": "Legacy field. Omit or set to 0 unless the user explicitly requests a minimum." }
       }
     }
   }

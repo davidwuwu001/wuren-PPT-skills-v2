@@ -101,13 +101,7 @@ else
   else
     echo "  未找到 npm，跳过 PptxGenJS 安装（生成 PPTX 时需要）"
   fi
-  if command -v python3 >/dev/null 2>&1; then
-    if python3 -c "import pptx" >/dev/null 2>&1; then
-      echo "  python-pptx 已就绪"
-    else
-      echo "  提示: qa.py 需要 python-pptx，可执行 pip3 install python-pptx"
-    fi
-  fi
+
 fi
 
 echo

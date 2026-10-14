@@ -21,7 +21,7 @@ git clone https://gitee.com/david0077/wuren-PPT-skills-v2.git ~/.skillshub/wuren
 bash ~/.skillshub/wuren-PPT-skills-v2/install.sh
 ```
 
-`install.sh` 会做三件事：建 11 个软链、`npm install` 装 PptxGenJS、检查 python-pptx。**可重复执行** —— 已正确的软链会跳过，指向错的会自动修，遇到真实目录会跳过并提示人工处理，绝不覆盖。
+`install.sh` 会建 11 个软链，并用 `npm install` 装 PptxGenJS。**可重复执行** —— 已正确的软链会跳过，指向错的会自动修，遇到真实目录会跳过并提示人工处理，绝不覆盖。
 
 常用参数：
 
@@ -46,11 +46,10 @@ powershell -ExecutionPolicy Bypass -File $HOME\.skillshub\wuren-PPT-skills-v2\in
 | 项目 | 要求 | 说明 |
 |---|---|---|
 | Git | 已安装 | macOS 可用 Xcode 命令行工具；Windows 装 Git for Windows |
-| Node.js + npm | 建议 | 生成 PPTX 用 PptxGenJS。没有它只能做 QA，不能生成 |
-| Python 3 + pip | 建议 | `qa.py` 质量检查用 python-pptx |
+| Node.js + npm | 建议 | 生成 PPTX 用 PptxGenJS。生成 PPTX 需要它 |
 | 网络 | 能访问 gitee.com | 公开仓库，免密 |
 
-依赖装不上也不影响 skill 被加载 —— 缺依赖时脚本会提示具体命令，skill 仍可正常读取，只是生成/质检环节会受限。
+依赖装不上也不影响 skill 被加载 —— 缺依赖时脚本会提示具体命令，skill 仍可正常读取，只是生成环节会受限。
 
 ---
 
@@ -59,10 +58,9 @@ powershell -ExecutionPolicy Bypass -File $HOME\.skillshub\wuren-PPT-skills-v2\in
 重启 AI 助手（多数助手只在启动时扫描 skills 目录），然后直接说需求，比如：
 
 - 「帮我做一份全国老师 AI 提效赋能培训的 PPT」
-- 「把这份 ppt 检查一下排版有没有越界」
 - 「给家长会做个宣讲 PPT，20 页以内」
 
-助手会按 skill 里的规则工作：先出 `deckBrief` 和 `slidePlan`，再按场景选视觉体系和版式，生成后渲染成图做质检。
+助手会按 skill 里的规则工作：先出 `deckBrief` 和 `slidePlan`，再按场景选视觉体系和版式，生成成功后直接提供 PPTX 链接，并提醒「PPT生成好了，你自己检查一下。」默认不做内容提取、渲染或自动检查。
 
 ### 支持的教育场景
 
@@ -94,7 +92,6 @@ Windows 把上面命令换成 `install.ps1` 的那条。
 | 重启后仍提示找不到 | 极少数助手按 frontmatter 里的 `name` 查找。该字段已与目录名统一为 `wuren-PPT-skills-v2`，若仍失败请贴报错原文 |
 | 装完说「找不到 wuren-PPT-skills-v2」但目录确实存在 | 助手缓存了旧的 skill 名册（改名前叫 `wuren-ppt-v2`），彻底退出重开助手进程 |
 | `npm: command not found` | 没装 Node.js。生成 PPTX 需要 PptxGenJS |
-| `ModuleNotFoundError: pptx` | 跑 `pip3 install python-pptx`，或 `bash install.sh` 会提示 |
 | Windows 链接失败 | 开开发者模式，或用管理员身份运行 PowerShell |
 | 软链指向了错误位置 | 重跑 `install.sh`，会自动修复 |
 | 目标位置是真实目录 | 脚本会跳过并提示，确认无用可手动删掉该目录后重跑 |

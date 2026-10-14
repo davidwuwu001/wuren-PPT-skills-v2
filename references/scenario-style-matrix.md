@@ -126,12 +126,16 @@ Examples: 读书分享、方法论分享、教研分享、技术/运营知识分
 
 ## Layout Rhythm Guidance
 
-Avoid making every slide visually identical. Use this rhythm:
+Plan rhythm around the source material. These are starting points for new decks; re-theming preserves original content, order and page count by default:
 
 - Start with `cover`.
-- Every 4-6 slides, insert `sectionDivider` or a low-density `quote`.
+- At a genuine topic shift or after a demanding sequence, consider a divider, question or quote already supported by the content. Do not add pages at fixed intervals or invent quotations.
 - Do not place more than 3 dense slides consecutively.
 - Follow a dense `chart` or `table` slide with a lower-density `summaryAction` or `quote`.
 - In parent/student decks, alternate explanation slides with example/activity/reflection slides.
 - In report decks, alternate result slides with analysis/action slides.
 
+
+## Composition Is Not a Fixed Template
+
+Read `design-direction-and-rhythm.md` to propose and confirm up to 3 deck-specific design directions with the user before planning. Use the scenario to choose mood and density, then choose composition from each slide’s content. Do not select a style silently when the user has not given one; continue autonomously only if the user explicitly asks you to decide. Read `ip-and-composition.md` for content-to-composition decisions. Keep brand tokens stable; do not translate every approved layout into the same card grid. For each newly authored slide, specify `layoutVariant` and a use/omit IP decision with its reason; if using IP, specify the real catalog key and placement. Always consult the catalog, but set no insertion quota; a deck without IP is valid when the scene or composition does not benefit from it. Reserve an illustration zone before sizing the text.

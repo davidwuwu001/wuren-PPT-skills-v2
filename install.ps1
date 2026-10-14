@@ -79,11 +79,7 @@ if ($NoDeps) {
   } else {
     Write-Host "  未找到 npm，跳过 PptxGenJS 安装（生成 PPTX 时需要）"
   }
-  if (Get-Command python -ErrorAction SilentlyContinue) {
-    python -c "import pptx" 2>$null
-    if ($LASTEXITCODE -ne 0) { Write-Host "  提示: qa.py 需要 python-pptx，可执行 pip install python-pptx" }
-    else { Write-Host "  python-pptx 已就绪" }
-  }
+
 }
 
 Write-Host ""

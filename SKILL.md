@@ -1,6 +1,6 @@
 ---
 name: wuren-PPT-skills-v2
-description: Use when creating, editing, reading, or quality-checking PPTX files for Wuren education-company scenarios, including training, student-facing lessons, parent talks, reports, summaries, proposals, enrollment, camps, workshops, and public presentations.
+description: Use when creating, editing, or reading PPTX files for Wuren education-company scenarios, including training, student-facing lessons, parent talks, reports, summaries, proposals, enrollment, camps, workshops, and public presentations.
 license: Proprietary
 ---
 
@@ -8,27 +8,41 @@ license: Proprietary
 
 ## Core Principle
 
-Do not directly improvise PPT pages from the user's text. First convert the content into a structured deck brief and slide plan, then generate slides from approved page patterns. Flexibility is allowed only through the scenario, audience, tone, content density, layout type, color role, and font role fields.
+Do not directly improvise PPT pages from the user's text. First convert the content into a structured deck brief and slide plan, then generate slides from approved page patterns. Keep brand colors, typography, logo and spacing consistent. Adapt composition and IP selection to each slide’s content; approved layout types describe information structure, not a single fixed drawing template.
 
 The goal is consistent Wuren visual quality across different AI models while still adapting layout, color, and typography to the content.
 
 ## Required Workflow
 
-1. Identify the education-company scenario and audience.
-2. Produce a `deckBrief` and `slidePlan` JSON before creating slides.
-3. Select one visual system from [references/scenario-style-matrix.md](references/scenario-style-matrix.md).
-4. Select each slide layout from the content signals, not from a fixed page order.
+1. Identify the scenario, audience, purpose and whether the source is a new deck or an existing-deck conversion. Read enough source content and original images to understand the available design material.
+2. Read [references/design-direction-and-rhythm.md](references/design-direction-and-rhythm.md). Unless the current request already names a concrete design direction or explicitly says to proceed without questions, present 2-3 concise, content-specific design directions and ask the user to choose or combine them. Explain each option’s visual hierarchy, composition and mood; recommend one and say why. Wait for the choice before writing the `deckBrief`, `slidePlan` or generating slides. Do not ask the user to invent a style or select from a generic fixed template catalog.
+3. After the direction is chosen, produce `deckBrief` and `slidePlan` JSON before creating slides, including the selected design direction, rationale, motif and rhythm. Select one visual system from [references/scenario-style-matrix.md](references/scenario-style-matrix.md). Read [references/ip-and-composition.md](references/ip-and-composition.md) and [assets/tangzai-catalog.json](assets/tangzai-catalog.json) for every PPT request, even when the user does not mention IP. Loading the catalog is mandatory; inserting IP is conditional on scene and composition fit.
+4. Plan narrative roles, visual focus and reading rhythm across the deck; select each slide layout and `layoutVariant` from content signals, not a single renderer for every page type. Assess IP suitability on every slide and record `assetHint.useTangzai` plus `selectionReason` for both use and omission. If suitable, resolve a real catalog asset and plan its position. If no slide is suitable, a deck with no IP is valid; do not add it to meet a quota.
 5. Create or reuse a dedicated project folder for the deck before writing files.
-6. Generate PPTX with PptxGenJS unless the user explicitly requires another route.
-7. Render the PPTX to images/PDF and run quality checks before reporting completion.
+6. Retrieve selected OSS assets into the deck project’s `assets/` before generation, inspect their actual appearance, then generate PPTX with PptxGenJS unless the user explicitly requires another route. Read the selected key and placement from the slide plan when adding IP images; never hardcode one generic image for all IP slides.
+7. Once PPTX generation succeeds, provide its file link immediately and say: “PPT生成好了，你自己检查一下。” Do not run text extraction, PDF/image rendering, visual QA, boundary/overlap checks, or Tangzai count checks. Do not create PDF or previews unless the user explicitly requests those deliverables. Never claim the deck has been checked.
 
 If information is missing, make a reasonable assumption and state it in `deckBrief.assumptions`. Ask the user only when missing information changes the PPT's purpose, audience, or confidentiality.
 
 Before creating a deck for a new scenario, compare the request with [references/slide-plan-examples.md](references/slide-plan-examples.md) and reuse the closest decision pattern.
 
+## Design Direction Checkpoint
+
+The user should be able to choose a meaningful visual direction before production. After inspecting the source, show at most 3 distinct options tailored to this deck; recommend one. Each option must explain the visible hierarchy and page compositions, not merely color names or mood adjectives. Ask one concise question and wait for the answer. Then write the plan and produce the deck without another style-approval checkpoint.
+
+Use this short format:
+
+> 我看了课件内容，建议从这几个方向里选：
+> **A · [方向]（推荐）**：[页面层级与典型构图]，适合[本课件的原因]。
+> **B · [方向]**：[不同的层级与构图]，适合[原因]。
+> **C · [方向]**：[明显不同的呈现]，适合[原因]。
+> 你选 A、B、C，或告诉我想混合哪两种？
+
+Base each option on the audience, purpose, density and supplied visual material. In a PPT conversion, make the original content and imagery part of the recommendation. Carry forward a visual preference the user has explicitly stated in the current request. If the user says to decide and proceed, choose the strongest fit and state the assumption. A request that already specifies a concrete design direction counts as the choice and does not need reconfirmation.
+
 ## Project Folder and File Organization
 
-Every deck must be saved inside a dedicated project folder under the current PPT workspace. Do not leave generated PPTX, PDF, preview folders, slide-plan JSON, or generation scripts loose in the workspace root.
+Every deck must be saved inside a dedicated project folder under the current PPT workspace. Do not leave generated PPTX, slide-plan JSON, or generation scripts loose in the workspace root.
 
 Default project folder name:
 
@@ -50,23 +64,21 @@ YYYY-MM-DD 中文主题/
   slide-plan.json
   output/
     主题_版本.pptx
-    主题_版本.pdf
-  preview/
-    版本名/
-      slide-01.png
-      slide-02.png
-      overview.png
 ```
 
 Rules:
 
 - `generate.js` and any helper scripts for this deck belong in the project folder.
 - `slide-plan.json` belongs in the project folder.
-- PPTX/PDF exports belong in `output/`.
-- Rendered slide images and montage previews belong in `preview/<版本名>/`.
-- For multiple deck versions, keep each preview in its own version folder, e.g. `preview/第一版`, `preview/第二版`, `preview/第二版_含讲稿备注`.
+- PPTX exports belong in `output/`. User-requested PDF exports also belong there.
+- Only when the user explicitly requests preview images, save them in `preview/<版本名>/`.
+- Do not generate previews as a completion gate.
 - Existing user-provided source files may stay where the user put them unless copying them into the project folder is necessary for reproducibility.
 - Root-level generated files are allowed only for shared reusable assets or dependencies, not per-deck artifacts.
+
+## Existing Deck Conversion
+
+For re-theming a supplied deck, preserve every page’s substantive text, facts, qualifiers, quotes, images and order unless the user explicitly requests editing. Reorganize visible content without shortening it or moving omitted text only into notes. Read the source before planning. Preserve source image bytes and aspect ratios; do not recolor, crop or redraw them when the user says images must stay unchanged. Density targets guide organization, not deletion. Preserve page count by default; split only when authorized or necessary for readability and disclose the change.
 
 ## Education Scenario Taxonomy
 
@@ -87,7 +99,7 @@ Use one primary scenario. Add a secondary scenario only when the deck genuinely 
 
 ## Dynamic Style Selection
 
-Choose style by scenario and audience. Never use a single fixed template for every deck.
+Choose style by scenario, audience, material and use context. Scenario narrows suitable moods; it does not select a fixed template. Read [references/design-direction-and-rhythm.md](references/design-direction-and-rhythm.md) on every deck task. Do not automatically reuse the last deck’s composition or force a different style when the content calls for continuity.
 
 | Scenario | Font strategy | Color strategy | Layout density | Visual mood |
 |---|---|---|---|---|
@@ -101,6 +113,16 @@ Choose style by scenario and audience. Never use a single fixed template for eve
 | `enrollment_recruitment` | `Yuanti SC` for families, `PingFang SC` for partner recruitment | Warm purple + yellow hope + blue capability proof | Low-medium | Trust-building, clear, encouraging |
 | `public_keynote` | Large `PingFang SC` or `Yuanti SC` depending on topic | High-contrast purple/orange hero pages + simple white pages | Low | Memorable, bold |
 | `knowledge_share` | Match audience: `Yuanti SC` for families/students, `PingFang SC` for professionals | Balanced purple + one concept accent per section | Medium | Thoughtful, legible |
+
+## Content-Led Design Decisions
+
+- Preserve brand identity through the approved assets, color roles, fonts and alignment discipline. Vary the composition, visual emphasis, whitespace and background treatment according to the chosen direction.
+- For newly authored plans, add `designDirection`, `designRationale`, `motif` and `rhythm` to `deckBrief.styleProfile`; add `narrativeRole` and `visualFocus` to each slide alongside `layoutVariant`.
+- Identify what the audience should notice first. A quotation, original photo, relationship diagram, important number, comparison or question may be the visual focus. Large typography alone is valid when it carries the message; never add filler imagery to satisfy a visual quota.
+- Do not default every page to title + accent bar + equal rounded cards. Use cards for truly peer items; use linked steps for a process, aligned counterparts for a comparison and a scene/evidence-first composition for a story.
+- Treat title coordinates below as a reference composition for standard content pages. Quote, hero, image and data pages may use different title positions while preserving readability and the brand/footer zones. Accent bars are optional, not a required brand signature.
+- Reuse semantic content and brand helpers in generation code, but implement the planned `layoutVariant` and visual hierarchy. Merely changing a layout name or IP key while drawing the same grid does not satisfy the plan.
+- Plan variation before generation. Keep the existing direct-delivery/no-post-generation-QA workflow; generate visual alternatives or previews only when requested.
 
 ## Brand Tokens
 
@@ -143,18 +165,19 @@ Required top-level fields:
 
 - `deckBrief`: purpose, scenario, audience, tone, assumptions, styleProfile
 - `slides`: ordered slide objects
-- `qualityBar`: measurable constraints
+- `designConstraints`: generation-time design guidance; not a validation gate
 
 Slide object fields:
 
 - `type`: one of the approved layout types
+- `layoutVariant`: describe the actual composition, e.g. `question-with-ip`, `horizontal-steps`, `story-with-side-note`; type alone does not determine the drawing
 - `intent`: what this slide must make the audience understand or feel
 - `contentDensity`: `low`, `medium`, or `high`
 - `colorRole`: dominant semantic color role
 - `fontRole`: `warm`, `professional`, or `hybrid`
 - `title`
 - `payload`: layout-specific structured content
-- `assetHint`: Tangzai or image guidance. For required Tangzai slides, set `useTangzai: true` and choose a `tangzaiKey`.
+- `assetHint`: record `useTangzai` and `selectionReason` on every newly planned slide. If true, also provide a real catalog `tangzaiKey` and `placement` with `x`, `y`, `w`, `h` in inches, preserving the image aspect ratio. If false, state why omission suits the content or composition and omit key/placement.
 
 ## Layout Selection Rules
 
@@ -203,23 +226,25 @@ If a slide exceeds density limits, split it into multiple slides.
 - Put Wuren logo on every slide except when the user provides a strict external template that already has logo placement.
 - Use `wurenlogo_1.png` on dark backgrounds and `wurenlogo_2.png` on light backgrounds.
 - Logo position: `x: 11.5, y: 0.2, w: 1.35, h: 0.5`.
-- Tangzai is part of the Wuren visual identity, not an optional decoration. Every newly generated deck must include Tangzai on at least 3 slides unless the user explicitly says not to use it.
-- Default Tangzai target: 3-5 slides per deck. For student lessons, parent talks, camp closing decks, workshops, and warm public talks, target 4-6 slides.
-- Keep the maximum at 7 Tangzai slides unless the deck is explicitly student-facing and the user asks for a more illustrated style.
+- Every PPT task must consult the scene IP catalog and consider it during slide planning without requiring extra user prompting. Use IP only when its actual pose, expression and scene support the message and a suitable position exists.
+- Do not impose a minimum, target count or percentage of IP slides. Zero IP slides is valid when no scene is suitable. Do not add filler IP or shrink useful content to fit it. Follow explicit user requests about IP usage.
 - **Tangzai 禁用场景（硬性规则）**：
   - `cover` 封面：使用主图 + 大标题，**不放 tangzai**
-  - `sectionDivider` 过渡页：连续的 part divider 最多 1 张用 tangzai
+  - `sectionDivider` 过渡页：不放 tangzai
   - `closing` 尾页：用 5 个单色球 shape 装饰（不要重复贴 tangzai.png）
   - 连续 2 张及以上 page 都用 tangzai → 改为间隔使用
   - 与 Logo 同侧时让出 logo 位置
 - Use Tangzai only where it supports meaning. Do not decorate every slide.
-- Required slide plan behavior: mark enough slides with `assetHint.useTangzai: true` to satisfy `qualityBar.minTangzaiSlides`.
+- Required slide plan behavior: record a use/omit decision and reason for every slide. `designConstraints.minTangzaiSlides` is a legacy compatibility field: omit it in new plans or set it to 0; a positive minimum is only appropriate when explicitly requested by the user.
 - Best Tangzai slide types: `agenda`, `quote`, `activity`, `caseStory`, `testimonial`, `summaryAction`, and selected low-density `cards` slides.
 - Avoid Tangzai on `cover`, `sectionDivider`, dense `chart`, dense tables, and slides where it would compete with core text.
 - Place Tangzai in a clear empty area: lower right, lower left, side margin beside text, or a dedicated illustration zone. Never overlap title, body text, charts, cards, footer, or logo.
 - Use explicit image dimensions. Do not rely on default image sizing.
 - **tangzai.png 是一个 4:1 横向长图（5 个汤圆排成一行）**，不是单球。尾页若要"5 球"装饰应画 shape 而不是贴图。
-- If only local `assets/tangzai.png` is available, use it. If the richer Tangzai OSS catalog is available, choose the image that best matches the slide intent.
+- Use [assets/tangzai-catalog.json](assets/tangzai-catalog.json) as the scene IP source. It contains real OSS URLs, poses, scene tags and original dimensions. Select from `assets`; entries in `unavailable` are old failed paths, not usable candidates.
+- Retrieve the selected asset and inspect its appearance before placing it. An old successful status is not a current availability guarantee; current retrieval must succeed and produce an image.
+- If retrieval fails, choose another accessible asset only when its pose still fits the meaning. Report unavailable assets briefly. Use `assets/tangzai.png` only as a disclosed fallback when appropriate scene assets cannot be retrieved; do not silently replace all chosen IP with the five-ball strip.
+- Let IP support the question, action, emotion or result, with a reserved illustration area. Do not always reduce it to a tiny lower-right ornament. Prefer 2D/3D consistency within a section; vary poses according to meaning, not at random.
 
 Tangzai semantic matching:
 
@@ -233,11 +258,14 @@ Tangzai semantic matching:
 | Time, plan, process, next step | `time` |
 | Technology or digital topic | `coding` |
 | Confidence, courage, breakthrough | `superhero` |
-| Closing thanks or warm goodbye | `leisure3d` |
+| Warm relationship or relaxed companionship on content pages | `leisure3d` |
+| Work execution or team collaboration | `office` |
+| Persistence or step-by-step challenge | `climb` |
+| Time management with a 3D visual section | `time3d` |
 
-## Quality Bar
+## Design Constraints
 
-The final deck must pass these checks:
+Apply these rules while composing slides. They do not require a post-generation inspection:
 
 - 16:9 wide layout.
 - No placeholder text remains.
@@ -249,20 +277,19 @@ The final deck must pass these checks:
 - Brand colors are used semantically, not randomly.
 - Parent/student pages remain readable from the back row.
 - Data/report pages prioritize evidence over decoration.
-- Tangzai appears on at least `qualityBar.minTangzaiSlides` slides. Default minimum is 3.
+- IP inclusion follows per-slide scene and composition fit, with no default minimum. Leave it out when it competes with evidence, text readability or the intended mood.
 - Tangzai placement is meaningful and non-overlapping.
 
 ## Spacing & Layout Rules (CRITICAL)
 
-Common failure modes from earlier decks. **Follow these without exception.**
+Keep these safety principles for every composition; the coordinates below are reference values for conventional content pages, not a universal page skeleton.
 
-### Title + Accent Bar
+### Title and Optional Accent Bar
 
-- Title block: `y: 0.85, h: 0.7` (occupies 0.85–1.55), or `h: 0.9` occupying 0.85–1.75
-- Accent bar **must sit BELOW title bottom + 0.15 inch gap**, never inside title
-  - For 0.9h title → bar at `y: 1.9` or later
-  - For 0.7h title → bar at `y: 1.7` or later
-- If page has a section subtitle (PART XX label) above title → move title down to `y: 1.0`, bar at `y: 1.95`
+- Choose title position and size from the narrative role, visual focus and content length. Do not mechanically place every title at the same coordinates.
+- Standard content-page reference: `y: 0.85, h: 0.7` or `h: 0.9`; when a section label sits above it, `y: 1.0` can work. Other compositions may differ.
+- Do not add an accent bar by default. If a meaningful divider is used, place it below the actual title bottom with at least 0.15 inch clearance; never calculate it from a fixed title height that the current slide does not use.
+- Preserve all source text during re-theming; create hierarchy and space through grouping and layout rather than deletion.
 
 ### Image Box vs Source Ratio
 
@@ -270,7 +297,6 @@ Common failure modes from earlier decks. **Follow these without exception.**
 
 - Teacher photo (0.667 source ratio): box must be `w/h = 0.667` (e.g., 3.4×5.1, 1.7×2.55)
 - Never use `sizing.cover` for standalone portraits. Use it only for crop-within-card where the loss is acceptable.
-- Always verify with the snippet in `references/pptxgenjs-gotchas.md` §6
 
 ### Logo / Page Number / Footer
 
@@ -287,11 +313,10 @@ Common failure modes from earlier decks. **Follow these without exception.**
 
 ## Completion Standard
 
-Do not say the PPT is complete until:
+PPTX generation success is the completion condition. Provide the generated PPTX link immediately and say:
 
-1. PPTX generation succeeds.
-2. Text extraction confirms content is present.
-3. PDF or image rendering succeeds.
-4. At least one visual QA pass has been performed.
-5. Tangzai count is checked. If fewer than 3 Tangzai slides are present and the user did not opt out, the deck is incomplete.
-6. Any discovered issues are fixed or explicitly reported.
+> PPT生成好了，你自己检查一下。
+
+Do not perform or require post-generation text extraction, schema validation, PDF/image rendering, visual QA, boundary/overlap checks, image-ratio validation, or Tangzai counting. Do not delay delivery for any inspection. The layout, font, color, and asset rules above guide generation only.
+
+If generation fails, resolve the generation error or report it accurately; do not say a file was generated when it was not. Export PDF or preview images only when the user explicitly requests those files.

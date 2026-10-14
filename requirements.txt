@@ -1,2 +1,0 @@
-# qa.py 的依赖。生成 PPTX 本身用 PptxGenJS（见 package.json）。
-python-pptx>=1.0,<2

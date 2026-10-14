@@ -57,11 +57,11 @@ User says: "做一份成长营顾问赋能培训 PPT，教顾问怎么做家长�
       }
     }
   ],
-  "qualityBar": {
+  "designConstraints": {
     "maxBodyCharsLowDensity": 60,
     "minMarginInches": 0.5,
     "logoRequired": true,
-    "renderRequired": true
+    "minTangzaiSlides": 0
   }
 }
 ```
@@ -134,3 +134,118 @@ Recommended slide rhythm:
 6. `timeline`: next-year plan
 7. `summaryAction`: decisions or resources needed
 
+
+## Example 5: Same Brand, Content-Led IP Selection
+
+For teacher training on child relationships, retain every source page’s content during re-theming. A discussion page can use this composition; the same section’s method page should use a different learning or process composition, rather than another identical card grid.
+
+```json
+{
+  "type": "activity",
+  "layoutVariant": "question-left-ip-right",
+  "intent": "引导老师依据具体事实讨论孩子需要",
+  "contentDensity": "low",
+  "colorRole": "emotion",
+  "fontRole": "warm",
+  "title": "这个孩子此刻最需要什么？",
+  "payload": {
+    "questions": ["你观察到了什么？", "你的依据是什么？"]
+  },
+  "assetHint": {
+    "useTangzai": true,
+    "tangzaiKey": "think",
+    "selectionReason": "汤仔抱胸歪头思考，与这一页的推测和讨论任务相符。",
+    "placement": {"x": 10.2, "y": 3.0, "w": 1.2, "h": 2.198757763975155}
+  }
+}
+```
+
+The existing shorter examples show decision patterns only. New complete plans must include `layoutVariant` for every slide and explicit IP selection/placement fields for IP slides. Use `assets/tangzai-catalog.json` to resolve keys to actual files. A method-learning page may choose `study` with a learning illustration area; a strength or breakthrough page may choose `superhero` with a result composition. Do not put the same five-ball strip into all three pages.
+
+
+## Example 6: Assess IP, Then Intentionally Omit It
+
+A slide showing original evidence or a dense chart can omit IP when no pose adds useful meaning or the image would compete with the evidence. This is an intentional per-slide decision, not a failure to load the catalog. An entire deck can omit IP if the same assessment applies throughout.
+
+```json
+{
+  "type": "caseStory",
+  "layoutVariant": "original-evidence-image",
+  "intent": "完整展示案例的现场手写记录",
+  "contentDensity": "medium",
+  "colorRole": "proof",
+  "fontRole": "professional",
+  "title": "现场梳理记录",
+  "payload": { "imageNeed": "沿用用户原图，保持比例完整展示" },
+  "assetHint": {
+    "useTangzai": false,
+    "selectionReason": "原始记录是画面重点；额外 IP 会挤占图片阅读空间，且不增加有效信息。"
+  }
+}
+```
+
+## Example 7: Direction and Rhythm Before Drawing
+
+For a new teacher-training deck, the following fragment shows concrete design decisions. Expand the original examples with these fields for newly authored plans. Older plans remain readable; do not rewrite archived decks just to add fields.
+
+```json
+{
+  "deckBrief": {
+    "purpose": "训练老师基于事实识别孩子需要",
+    "scenario": "internal_training",
+    "audience": "住家老师与顾问",
+    "tone": "practical",
+    "styleProfile": {
+      "fontStrategy": "hybrid",
+      "colorStrategy": "白底与品牌紫标题，蓝色用于方法关系",
+      "layoutDensity": "medium",
+      "designDirection": "以孩子原话与观察线索展开的清晰推演",
+      "designRationale": "重点是建立判断方法，选用问题与关系图推进；避免把训练内容全部处理为情感海报。",
+      "motif": "线索、假设与核实的连接关系",
+      "rhythm": "先用问题聚焦，再用浅底流程展开；遇到案例原图时让证据成为主角。"
+    },
+    "assumptions": ["此示例为新课件内容；转换现有课件时保留原文、顺序及原图。"]
+  },
+  "slides": [
+    {
+      "type": "activity",
+      "intent": "让老师区分观察到的事实与推测",
+      "narrativeRole": "提问与思考",
+      "visualFocus": "你看到了什么，哪些只是你的猜测？",
+      "layoutVariant": "large-question-with-side-ip",
+      "contentDensity": "low",
+      "colorRole": "insight",
+      "fontRole": "warm",
+      "title": "你看到了什么，哪些只是你的猜测？",
+      "payload": {"questions": ["先说事实，再说推测。"]},
+      "assetHint": {
+        "useTangzai": true,
+        "tangzaiKey": "think",
+        "selectionReason": "思考姿态呼应辨别事实的任务，问题侧边有明确的插图区。",
+        "placement": {"x": 10.2, "y": 3.0, "w": 1.2, "h": 2.198757763975155}
+      }
+    },
+    {
+      "type": "timeline",
+      "intent": "建立可以重复练习的判断过程",
+      "narrativeRole": "方法展开",
+      "visualFocus": "从事实到假设再到核实的顺序关系",
+      "layoutVariant": "connected-horizontal-steps-with-annotations",
+      "contentDensity": "medium",
+      "colorRole": "learning",
+      "fontRole": "professional",
+      "title": "让判断回到孩子的反馈里",
+      "payload": {"steps": ["记录具体事实", "提出需要假设", "向孩子核实"]},
+      "assetHint": {
+        "useTangzai": false,
+        "selectionReason": "步骤连接是主体，IP没有额外解释价值；为文字与流程保留空间。"
+      }
+    }
+  ],
+  "designConstraints": {
+    "maxBodyCharsLowDensity": 60,
+    "minMarginInches": 0.5,
+    "logoRequired": true
+  }
+}
+```

@@ -103,30 +103,3 @@ for f, info in sorted(result.items(), key=lambda x: x[1]['ratio']):
 | logo 模糊 | 用了 `wurenlogo_1.png` 但需要浅色 | 浅底用 `wurenlogo_2.png`，深底用 `wurenlogo_1.png` |
 | tangzai 重复使用 | 没规划"哪些页用 tangzai" | 见 SKILL.md Tangzai 章节规则 |
 
-## 6. 验证清单
-
-写完脚本后用这段快速验证图片是否变形：
-
-```bash
-# 用 python-pptx 提取每张图片的显示尺寸，与原图比较
-python3 -c "
-from pptx import Presentation
-from PIL import Image
-import os
-p = Presentation('output.pptx')
-for i, s in enumerate(p.slides, 1):
-    for sh in s.shapes:
-        if sh.shape_type == 13:  # PICTURE
-            # 显示尺寸（EMU → inches）
-            disp_w = sh.width / 914400
-            disp_h = sh.height / 914400
-            disp_ratio = disp_w / disp_h
-            # 原图比例
-            try:
-                with Image.open(sh.image.filename if hasattr(sh.image,'filename') else '') as im:
-                    src_ratio = im.size[0] / im.size[1]
-                if abs(disp_ratio - src_ratio) > 0.05:
-                    print(f'  ⚠ slide {i}: {os.path.basename(sh.image.filename)} 显示 {disp_ratio:.2f} vs 原图 {src_ratio:.2f}')
-            except: pass
-"
-```

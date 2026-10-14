@@ -1,0 +1,208 @@
+{
+  "checkedOn": "2026-10-14",
+  "verification": "GET成功，图片可解码；状态仅为检查当日快照，生成时读取所选文件。",
+  "baseUrl": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/",
+  "assets": {
+    "office": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E5%8A%9E%E5%85%AC-%E5%9C%A8%E7%94%B5%E8%84%91%E5%89%8D%E5%BF%99%E7%A2%8C%E5%B7%A5%E4%BD%9C.png",
+      "filename": "汤仔-2D-办公-在电脑前忙碌工作.png",
+      "appearance": "电脑前忙碌工作",
+      "sceneTags": [
+        "工作执行",
+        "团队协作",
+        "运营方法"
+      ],
+      "dimensionStyle": "2D",
+      "width": 853,
+      "height": 1280,
+      "lastStatus": 200
+    },
+    "study": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E5%AD%A6%E4%B9%A0-%E6%88%B4%E5%8D%9A%E5%A3%AB%E5%B8%BD%E5%9C%A8%E4%B9%A6%E5%A0%86%E6%97%81%E9%98%85%E8%AF%BB.png",
+      "filename": "汤仔-2D-学习-戴博士帽在书堆旁阅读.png",
+      "appearance": "戴博士帽在书堆旁阅读",
+      "sceneTags": [
+        "方法学习",
+        "案例分析",
+        "阅读",
+        "概念解释"
+      ],
+      "dimensionStyle": "2D",
+      "width": 772,
+      "height": 588,
+      "lastStatus": 200
+    },
+    "think": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E6%80%9D%E8%80%83-%E5%8F%8C%E6%89%8B%E6%8A%B1%E8%83%B8%E6%AD%AA%E5%A4%B4%E7%96%91%E6%83%91.png",
+      "filename": "汤仔-2D-思考-双手抱胸歪头疑惑.png",
+      "appearance": "双手抱胸歪头疑惑",
+      "sceneTags": [
+        "提问",
+        "反思",
+        "讨论",
+        "需要判断",
+        "不确定性"
+      ],
+      "dimensionStyle": "2D",
+      "width": 322,
+      "height": 590,
+      "lastStatus": 200
+    },
+    "hello": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E6%89%93%E6%8B%9B%E5%91%BC-%E6%88%B4%E9%BB%84%E5%B8%BD%E6%8C%A5%E6%89%8B%E8%87%B4%E6%84%8F.png",
+      "filename": "汤仔-2D-打招呼-戴黄帽挥手致意.png",
+      "appearance": "戴黄帽挥手致意",
+      "sceneTags": [
+        "邀请",
+        "建立连接",
+        "参与活动"
+      ],
+      "dimensionStyle": "2D",
+      "width": 397,
+      "height": 596,
+      "lastStatus": 200
+    },
+    "explore": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E6%8E%A2%E9%99%A9-%E6%89%8B%E6%8C%81%E6%9C%9B%E8%BF%9C%E9%95%9C%E7%9C%BA%E6%9C%9B%E8%BF%9C%E6%96%B9.png",
+      "filename": "汤仔-2D-探险-手持望远镜眺望远方.png",
+      "appearance": "手持望远镜眺望远方",
+      "sceneTags": [
+        "探索兴趣",
+        "发现需要",
+        "自我认识",
+        "未来可能"
+      ],
+      "dimensionStyle": "2D",
+      "width": 518,
+      "height": 664,
+      "lastStatus": 200
+    },
+    "time": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E6%97%B6%E9%97%B4-%E4%BE%9D%E9%9D%A0%E5%9C%A8%E5%B7%A8%E5%A4%A7%E6%97%B6%E9%92%9F%E6%97%81.png",
+      "filename": "汤仔-2D-时间-依靠在巨大时钟旁.png",
+      "appearance": "依靠在巨大时钟旁",
+      "sceneTags": [
+        "计划",
+        "流程",
+        "节奏",
+        "下一步行动"
+      ],
+      "dimensionStyle": "2D",
+      "width": 905,
+      "height": 1280,
+      "lastStatus": 200
+    },
+    "cheer": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E6%AC%A2%E5%91%BC-%E4%B8%BE%E8%B5%B7%E5%8F%8C%E6%89%8B%E5%BC%80%E5%BF%83%E5%BA%86%E7%A5%9D.png",
+      "filename": "汤仔-2D-欢呼-举起双手开心庆祝.png",
+      "appearance": "举起双手开心庆祝",
+      "sceneTags": [
+        "成果",
+        "成长",
+        "完成",
+        "庆祝"
+      ],
+      "dimensionStyle": "2D",
+      "width": 400,
+      "height": 621,
+      "lastStatus": 200
+    },
+    "coding": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E8%81%8C%E4%B8%9A-%E6%88%B4%E8%80%B3%E6%9C%BA%E6%93%8D%E4%BD%9C%E5%85%A8%E6%81%AF%E6%8A%95%E5%BD%B1%E7%BC%96%E7%A8%8B.png",
+      "filename": "汤仔-2D-职业-戴耳机操作全息投影编程.png",
+      "appearance": "戴耳机操作全息投影编程",
+      "sceneTags": [
+        "编程",
+        "技术",
+        "数字工具"
+      ],
+      "dimensionStyle": "2D",
+      "width": 905,
+      "height": 1280,
+      "lastStatus": 200
+    },
+    "superhero": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E8%B6%85%E4%BA%BA-%E6%8A%AB%E6%96%97%E7%AF%B7%E6%A8%A1%E4%BB%BF%E8%B6%85%E7%BA%A7%E8%8B%B1%E9%9B%84.png",
+      "filename": "汤仔-2D-超人-披斗篷模仿超级英雄.png",
+      "appearance": "披斗篷模仿超级英雄",
+      "sceneTags": [
+        "信心",
+        "勇气",
+        "突破",
+        "获得力量"
+      ],
+      "dimensionStyle": "2D",
+      "width": 394,
+      "height": 637,
+      "lastStatus": 200
+    },
+    "climb": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E8%BF%90%E5%8A%A8-%E6%82%AC%E6%8C%82%E7%BB%B3%E7%B4%A2%E6%94%80%E7%99%BB%E5%B3%AD%E5%A3%81.png",
+      "filename": "汤仔-2D-运动-悬挂绳索攀登峭壁.png",
+      "appearance": "悬挂绳索攀登峭壁",
+      "sceneTags": [
+        "挑战",
+        "坚持",
+        "分步突破"
+      ],
+      "dimensionStyle": "2D",
+      "width": 905,
+      "height": 1280,
+      "lastStatus": 200
+    },
+    "leisure3d": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-3D-%E4%BC%91%E9%97%B2%E5%BD%A2%E8%B1%A1-%E6%88%B4%E9%BB%84%E5%B8%BD%E7%A9%BF%E9%BB%84%E8%A1%A3%E8%83%8C%E6%89%8B%E5%BE%AE%E7%AC%91.jpg",
+      "filename": "汤仔-3D-休闲形象-戴黄帽穿黄衣背手微笑.jpg",
+      "appearance": "戴黄帽穿黄衣背手微笑",
+      "sceneTags": [
+        "轻松交流",
+        "稳定陪伴",
+        "温暖关系"
+      ],
+      "dimensionStyle": "3D",
+      "width": 1067,
+      "height": 1600,
+      "lastStatus": 200
+    },
+    "time3d": {
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-3D-%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86-%E4%BE%9D%E9%9D%A0%E5%B7%A8%E5%A4%A7%E9%97%B9%E9%92%9F%E6%8E%8C%E6%8E%A7%E6%97%B6%E9%97%B4.jpg",
+      "filename": "汤仔-3D-时间管理-依靠巨大闹钟掌控时间.jpg",
+      "appearance": "依靠巨大闹钟掌控时间",
+      "sceneTags": [
+        "时间管理",
+        "计划",
+        "行动节奏"
+      ],
+      "dimensionStyle": "3D",
+      "width": 1067,
+      "height": 1600,
+      "lastStatus": 200
+    }
+  },
+  "unavailable": [
+    {
+      "filename": "汤仔-2D-艺术-手持画笔在画布前创作.png",
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E8%89%BA%E6%9C%AF-%E6%89%8B%E6%8C%81%E7%94%BB%E7%AC%94%E5%9C%A8%E7%94%BB%E5%B8%83%E5%89%8D%E5%88%9B%E4%BD%9C.png",
+      "lastStatus": 404
+    },
+    {
+      "filename": "汤仔-2D-音乐-戴耳机沉浸音乐世界.png",
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-2D-%E9%9F%B3%E4%B9%90-%E6%88%B4%E8%80%B3%E6%9C%BA%E6%B2%89%E6%B5%B8%E9%9F%B3%E4%B9%90%E4%B8%96%E7%95%8C.png",
+      "lastStatus": 404
+    },
+    {
+      "filename": "汤仔-3D-奖牌-双手举起金牌开心庆祝.png",
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-3D-%E5%A5%96%E7%89%8C-%E5%8F%8C%E6%89%8B%E4%B8%BE%E8%B5%B7%E9%87%91%E7%89%8C%E5%BC%80%E5%BF%83%E5%BA%86%E7%A5%9D.png",
+      "lastStatus": 404
+    },
+    {
+      "filename": "汤仔-3D-爱心形象-双手捧爱心微笑.png",
+      "url": "https://tz-qianzi.oss-cn-shanghai.aliyuncs.com/PPT%E5%8F%82%E8%80%83%E5%9B%BE/%E6%B1%A4%E4%BB%94-3D-%E7%88%B1%E5%BF%83%E5%BD%A2%E8%B1%A1-%E5%8F%8C%E6%89%8B%E6%8D%A7%E7%88%B1%E5%BF%83%E5%BE%AE%E7%AC%91.png",
+      "lastStatus": 404
+    }
+  ],
+  "fallback": {
+    "path": "assets/tangzai.png",
+    "description": "五球横排品牌群像，仅在明确无法读取已选场景素材时使用；不能等价替代场景IP。"
+  }
+}
